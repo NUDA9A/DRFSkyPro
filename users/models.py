@@ -26,7 +26,7 @@ class Payment(models.Model):
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, verbose_name="Оплаченный курс", **NULLABLE)
     price = models.PositiveIntegerField(verbose_name="Стоимость")
     method_choices = {"Наличными": "cash", "Перевод": "card"}
-    payment_method = models.CharField(max_length=10, choices=method_choices, verbose_name="Способо оплаты")
+    payment_method = models.CharField(max_length=10, choices=method_choices, default="card", verbose_name="Способо оплаты")
 
     def __str__(self):
         return f'{self.payment_method} {self.course}'
