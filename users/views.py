@@ -3,7 +3,6 @@ from rest_framework import generics, permissions
 from django_filters.rest_framework import DjangoFilterBackend, OrderingFilter
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from courses.permissions import IsAuth
 from users.models import Payment, User
 from users.serializers import PaymentSerializer, UserSerializer, UserPermSerializer, UserCreateSerializer
 
@@ -39,27 +38,27 @@ class PaymentDestroyAPIView(generics.DestroyAPIView):
 
 class UserCreateAPIView(generics.CreateAPIView):
     serializer_class = UserCreateSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [AllowAny,]
 
 
 class UserListAPIView(generics.ListAPIView):
     serializer_class = UserPermSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,]
 
 
 class UserRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,]
 
 
 class UserUpdateAPIView(generics.UpdateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated, IsAuth]
+    permission_classes = [IsAuthenticated,]
 
 
 class UserDestroyAPIView(generics.DestroyAPIView):
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated, IsAuth]
+    permission_classes = [IsAuthenticated,]
